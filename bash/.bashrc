@@ -36,7 +36,6 @@ export PATH="$PATH:/home/cade/.foundry/bin"
 green="\[\033[0;36m\]"
 purple="\[\033[0;35m\]"
 white="\[\033[0m\]"
-light_green="\[\033[0;32m\]"
 yellow="\[\033[0;33m\]"
 # get dir git status
 git_prompt() {
@@ -48,14 +47,14 @@ git_prompt() {
         git_status=$(git status --porcelain 2>/dev/null)
         # Set the color based on the status
         if [[ -n "$git_status" ]]; then
-          git_change="$yellow"
+            git_change="ˣ"
         else
-          git_change="$light_green"
+            git_change=""
         fi
         # Combine the branch name and color
-        echo -e " $git_change($git_branch)"
+        echo -e " (${git_branch}${git_change})"
     fi
 }
 
 # Set the prompt to include the Git status
-export PS1="$green\W$(git_prompt) $purple\$ $white"
+export PS1="$green\W$yellow\$(git_prompt) $purple\$ $white"
