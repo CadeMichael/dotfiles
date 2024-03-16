@@ -23,6 +23,7 @@ export PATH=$PATH:/home/cade/go/bin
 export PATH="$PATH:/home/cade/.local/share/coursier/bin"
 
 # [npm global]
+# add to ~/.npmrc -> prefix=/home/cade/.npm-global
 export PATH="$PATH:/home/cade/.npm-global/bin"
 
 # for local npm installs
