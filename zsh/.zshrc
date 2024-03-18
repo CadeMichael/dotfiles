@@ -19,4 +19,4 @@ git_prompt() {
 }
 
 setopt PROMPT_SUBST
-PROMPT='%{%F{cyan}%}%1~% $(git_prompt)%{%F{none}%} %% '
+PROMPT='%{%F{cyan}%}%1~% $(git_prompt)%{%F{blue}%} %% %{%F{none}%}'
