@@ -1,5 +1,20 @@
+# Completion
+autoload -Uz compinit && compinit
+# case insensitive path-completion 
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
+
+# Packages
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# [npm global]
+# add to ~/.npmrc -> prefix="$HOME/.npm-global"
+export PATH="$PATH:$HOME/.npm-global/bin"
+# for local npm installs
+export PATH=$PATH:./node_modules/.bin
+
 # Alias
 alias ls='ls --color=auto'
+alias vi=nvim
 
 # Prompt
 git_prompt() {
