@@ -5,6 +5,9 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# tab completion
+bind -s 'set completion-ignore-case on'
+
 # fzf
 source /usr/share/fzf/key-bindings.bash
 source /usr/share/fzf/completion.bash
