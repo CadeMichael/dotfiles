@@ -35,3 +35,36 @@ git_prompt() {
 
 setopt PROMPT_SUBST
 PROMPT='%{%F{cyan}%}%1~% $(git_prompt)%{%F{blue}%} %% %{%F{none}%}'
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba init' !!
+export MAMBA_EXE='/opt/homebrew/opt/micromamba/bin/micromamba';
+export MAMBA_ROOT_PREFIX='/Users/cade/micromamba';
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias micromamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
+
+# function for activating mamba envs
+# mcm => micromamba
+function mcm() {
+  MAMBA_ENVS="$HOME/micromamba/envs/"
+
+  if [[ "$1" == "-d" ]]; then
+    micromamba deactivate
+  else
+    # Use fzf to select a directory
+    selected_env=$(ls "$MAMBA_ENVS" | fzf)
+
+    # Check if a directory was selected
+    if [ -n "$selected_env" ]; then
+        micromamba activate "$selected_env"
+    else
+        echo "No env selected."
+    fi
+  fi
+}
