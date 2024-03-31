@@ -74,3 +74,23 @@ else
 fi
 unset __mamba_setup
 # <<< mamba initialize <<<
+
+# function for activating mamba envs
+# mcm => micromamba
+function mcm() {
+  MAMBA_ENVS="$HOME/micromamba/envs/"
+
+  if [[ "$1" == "-d" ]]; then
+    micromamba deactivate
+  else
+    # Use fzf to select a directory
+    selected_env=$(ls "$MAMBA_ENVS" | gum filter --placeholder "choose env...")
+
+    # Check if a directory was selected
+    if [ -n "$selected_env" ]; then
+        micromamba activate "$selected_env"
+    else
+        echo "No env selected."
+    fi
+  fi
+}
