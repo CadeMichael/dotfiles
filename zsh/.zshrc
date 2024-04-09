@@ -6,11 +6,21 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 # Packages
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# [Homebrew]
+# Curl
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
+# Libtool
+export PATH="/opt/homebrew/opt/libtool/libexec/gnubin:$PATH"
+
 # [npm global]
 # add to ~/.npmrc -> prefix="$HOME/.npm-global"
 export PATH="$PATH:$HOME/.npm-global/bin"
 # for local npm installs
 export PATH=$PATH:./node_modules/.bin
+# [nim]
+export PATH="$PATH:$HOME/.nimble/bin"
 
 # Alias
 alias ls='ls --color=auto'
@@ -59,7 +69,6 @@ function mcm() {
   else
     # Use fzf to select a directory
     selected_env=$(ls "$MAMBA_ENVS" | fzf)
-
     # Check if a directory was selected
     if [ -n "$selected_env" ]; then
         micromamba activate "$selected_env"
