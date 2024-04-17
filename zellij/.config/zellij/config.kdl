@@ -274,24 +274,24 @@ themes {
         white "#cdd6f4"
     }
     gruvbox-dark {
-        fg 213 196 161
-        bg 40 40 40
-        black 60 56 54
-        red 204 36 29
-        green 152 151 26
-        yellow 215 153 33
-        blue 69 133 136
-        magenta 177 98 134
-        cyan 104 157 106
-        white 251 241 199
-        orange 214 93 14
+        fg "#d5c4a1"
+        bg "#282828"
+        black "#3c3836"
+        red "#cc241d"
+        green "#98971a"
+        yellow "#d79921"
+        blue "#458588"
+        magenta "#b16286"
+        cyan "#689d6a"
+        white "#fbf1c7"
+        orange "#d65d0e"
     }
 }
 
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
-theme "gruvbox-dark"
+theme "catppuccin-mocha"
 
 // The name of the default layout to load on startup
 // Default: "default"
