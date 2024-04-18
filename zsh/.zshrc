@@ -23,7 +23,7 @@ export PATH=$PATH:./node_modules/.bin
 export PATH="$PATH:$HOME/.nimble/bin"
 
 # Alias
-alias ls='ls --color=auto'
+alias l='ls --color=auto'
 alias vi=nvim
 
 # Prompt
