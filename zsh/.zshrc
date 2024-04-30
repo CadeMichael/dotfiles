@@ -21,30 +21,22 @@ export PATH="$PATH:$HOME/.npm-global/bin"
 export PATH=$PATH:./node_modules/.bin
 # [nim]
 export PATH="$PATH:$HOME/.nimble/bin"
+# [zig]
+export PATH="$PATH:$HOME/.zig/zig-macos-x86_64-0.13.0-dev"
 
 # Alias
-alias l='ls --color=auto'
-alias vi=nvim
-
-# Prompt
-# git_prompt() {
-    # # Check if the current directory is in a Git repository
-    # if git rev-parse --git-dir > /dev/null 2>&1; then
-        # # Get the current branch name
-        # git_branch=$(git branch 2>/dev/null | grep '^*' | colrm 1 2)
-        # # Get the status of the repository
-        # git_status=$(git status --porcelain 2>/dev/null)
-        # # Set the color based on the status
-        # if [[ -n "$git_status" ]]; then
-            # echo -e " %{%F{yellow}%}(${git_branch})"
-        # else
-            # echo -e " %{%F{green}%}(${git_branch})"
-        # fi
-    # fi
-# }
-
-# setopt PROMPT_SUBST
-# PROMPT='%{%F{cyan}%}%1~% $(git_prompt)%{%F{blue}%} %% %{%F{none}%}'
+alias l='ls --color=auto -F'
+alias v=nvim
+# [git]
+alias lg=lazygit
+alias gd='git diff'
+alias ga='git add .'
+alias gc='git commit'
+# [zellij]
+alias za='zellij a'
+alias zs='zellij -s'
+alias zd='zellij d'
+alias zda='zellij da'
 
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba init' !!

@@ -21,7 +21,7 @@ keybinds clear-defaults=true {
         bind "-" { Resize "Decrease"; }
     }
     pane {
-        bind "Ctrl w" { SwitchToMode "Normal"; }
+        bind "Ctrl p" { SwitchToMode "Normal"; }
         bind "h" "Left" { MoveFocus "Left"; }
         bind "l" "Right" { MoveFocus "Right"; }
         bind "j" "Down" { MoveFocus "Down"; }
@@ -29,6 +29,14 @@ keybinds clear-defaults=true {
         bind "p" { SwitchFocus; }
         bind "n" { NewPane; SwitchToMode "Normal"; }
         bind "d" { NewPane "Down"; SwitchToMode "Normal"; }
+        bind "g" { 
+          Run "lazygit" {
+            close_on_exit true
+          };
+          TogglePaneEmbedOrFloating;
+          Resize "Increase";
+          SwitchToMode "Normal";
+        }
         bind "r" { NewPane "Right"; SwitchToMode "Normal"; }
         bind "x" { CloseFocus; SwitchToMode "Normal"; }
         bind "f" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
@@ -161,7 +169,7 @@ keybinds clear-defaults=true {
         bind "Enter" "Esc" { SwitchToMode "Normal"; }
     }
     shared_except "pane" "locked" {
-        bind "Ctrl w" { SwitchToMode "Pane"; }
+        bind "Ctrl p" { SwitchToMode "Pane"; }
     }
     shared_except "resize" "locked" {
         bind "Ctrl n" { SwitchToMode "Resize"; }
@@ -211,7 +219,7 @@ on_force_close "quit"
 //    - true
 //    - false (Default)
 //
-simplified_ui true
+simplified_ui false
 
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL
@@ -272,19 +280,6 @@ themes {
         cyan "#89dceb" // Sky
         black "#181825" // Mantle
         white "#cdd6f4"
-    }
-    gruvbox-dark {
-        fg "#d5c4a1"
-        bg "#282828"
-        black "#3c3836"
-        red "#cc241d"
-        green "#98971a"
-        yellow "#d79921"
-        blue "#458588"
-        magenta "#b16286"
-        cyan "#689d6a"
-        white "#fbf1c7"
-        orange "#d65d0e"
     }
 }
 
@@ -347,7 +342,7 @@ default_layout "compact"
 // Path to the default editor to use to edit pane scrollbuffer
 // Default: $EDITOR or $VISUAL
 //
-// scrollback_editor "/usr/bin/vim"
+scrollback_editor "nvim"
 
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)
