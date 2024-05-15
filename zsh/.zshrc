@@ -21,12 +21,13 @@ export PATH="$PATH:$HOME/.npm-global/bin"
 export PATH=$PATH:./node_modules/.bin
 # [nim]
 export PATH="$PATH:$HOME/.nimble/bin"
-# [zig]
-export PATH="$PATH:$HOME/.zig/zig-macos-x86_64-0.13.0-dev"
 
 # Alias
 alias l='ls --color=auto -F'
 alias v=nvim
+alias pss="ps aux | rg -i "
+# [khal]
+alias kwl="khal list today 7d"
 # [git]
 alias lg=lazygit
 alias gd='git diff'
