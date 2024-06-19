@@ -29,14 +29,6 @@ keybinds clear-defaults=true {
         bind "p" { SwitchFocus; }
         bind "n" { NewPane; SwitchToMode "Normal"; }
         bind "d" { NewPane "Down"; SwitchToMode "Normal"; }
-        bind "C" { 
-          Run "ikhal" {
-            close_on_exit true
-          };
-          TogglePaneEmbedOrFloating;
-          Resize "Increase";
-          SwitchToMode "Normal";
-        }
         bind "g" { 
           Run "lazygit" {
             close_on_exit true
