@@ -30,8 +30,8 @@
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
 (setq doom-font
       (if doom--system-macos-p
-          (font-spec :size 15)
-        (font-spec :size 22)))
+          (font-spec :size 16)
+        (font-spec :size 26)))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
