@@ -23,7 +23,7 @@
 
 (setq doom-font
       (if doom--system-macos-p
-          (font-spec :family "Blex Mono Nerd Font" :size 15)
+          (font-spec :family "Hack Nerd Font" :size 15)
         (font-spec :family "Blex Mono Nerd Font" :size 14)))
 
 (setq doom-theme 'catppuccin)
