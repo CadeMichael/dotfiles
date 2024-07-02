@@ -1,4 +1,4 @@
-;;; lang/flix/init.el -*- lexical-binding: t; -*-
+;;; lang/flix/config.el -*- lexical-binding: t; -*-
 
 (defconst flix-mode-keywords
   '("alias" "and" "as" "case" "catch" "chan" "choose" "class" "def"
@@ -15,7 +15,7 @@
   `(("\\_<Impure\\|null\\_>\\|\\?\\?\\?\\|\\?[_[:lower:]][_[:alnum:]]*" (0 font-lock-warning-face))
     ("\\_<Pure\\_>" (0 font-lock-function-name-face))
     ("\\_<\\(true\\|false\\)\\_>" (0 font-lock-builtin-face))
-    ("def[ \t]+\\([_[:lower:]][_![:alnum:]]*\\)" (1 font-lock-function-name-face))
+    ("\\<\\(\\sw+\\)(" (1 font-lock-function-name-face))
     ("let\\*?[ \t]+\\([_[:lower:]][_[:alnum:]]*\\)" (1 font-lock-variable-name-face))
     ("\\_<\\([_[:lower:]][_[:alnum:]]*\\)[ \t]*:[ \t_[:upper:]]" (1 font-lock-variable-name-face))
     ("\\_<\\([_[:upper:]][_[:alnum:]]*\\)\\_>" (0 font-lock-type-face))
@@ -89,3 +89,85 @@
 (provide 'flix-mode)
 
 ;;; flix-mode.el ends here
+
+
+;;; Flix Repl
+(require 'comint)
+(require 'ansi-color)
+
+(defvar flix-jar-directory nil
+  "The directory from which to start the Flix REPL.")
+
+(defvar flix-last-buffer nil
+  "The last flix buffer to call the repl")
+
+(defun +flix--repl-apply-ansi-color (string)
+  "Apply ANSI color codes to STRING."
+  (ansi-color-apply string))
+
+(defun +flix--repl-stop-repl ()
+  "Stop the current Flix REPL process, if any."
+  (let ((buffer (get-buffer "*Flix REPL*")))
+    (when (and buffer (get-buffer-process buffer))
+      (kill-process (get-buffer-process buffer))
+      (kill-buffer buffer))))
+
+(defun +flix--repl-start-repl ()
+  "Start a new Flix REPL process."
+  (let* ((default-directory (or flix-jar-directory (read-directory-name "Select directory with flix.jar: ")))
+         (buffer (get-buffer-create "*Flix REPL*")))
+    (unless (comint-check-proc buffer)
+      (with-current-buffer buffer
+        (setq flix-jar-directory default-directory)
+        (apply 'make-comint-in-buffer "Flix REPL" buffer "java" nil '("-jar" "flix.jar" "repl"))
+        (flix-repl-mode)))
+    (pop-to-buffer buffer)))
+
+(defvar flix-repl-mode-map
+  (let ((map (nconc (make-sparse-keymap) comint-mode-map)))
+    (define-key map "\t" 'completion-at-point)
+    map)
+  "Basic mode map for `flix-repl-mode`.")
+
+(defun +flix--repl-initialize ()
+  "Helper function to initialize `flix-repl`."
+  (setq comint-process-echoes t)
+  (setq comint-use-prompt-regexp t)
+  (add-hook 'comint-preoutput-filter-functions '+flix--repl-apply-ansi-color nil t))
+
+(define-derived-mode flix-repl-mode comint-mode "Flix REPL"
+  "Major mode for `flix-repl`."
+  nil "Flix REPL"
+  (setq comint-prompt-regexp "flix> ")
+  (setq mode-line-process '(":%s"))
+  (setq comint-get-old-input (lambda () ""))
+  (setq comint-process-echoes t)
+  (setq comint-use-prompt-regexp t)
+  (set (make-local-variable 'paragraph-separate) "\\'")
+  (set (make-local-variable 'paragraph-start) comint-prompt-regexp)
+  (set (make-local-variable 'font-lock-defaults) '(nil t))
+  (set (make-local-variable 'comint-input-filter)
+       (lambda (str) (not (string-match "\\`\\s-*\\'" str))))
+  (set (make-local-variable 'comint-output-filter-functions)
+       (list 'comint-postoutput-scroll-to-bottom)))
+
+(add-hook 'flix-repl-mode-hook '+flix--repl-initialize)
+
+(provide 'flix-repl)
+
+
+;; Keymaps for flix-mode.
+(map! :map 'flix-mode-map
+      :desc "restart flix repl" "C-c C-c C-r" #'+flix/repl-restart
+      :desc "set jar directory" "C-c C-d" #'+flix/set-jar-directory
+      :desc "run flix project" "C-c C-r" #'+flix/run-project
+      :desc "build flix project" "C-c C-b" #'+flix/build-project
+      :desc "flix install jar" "C-c C-j" #'+flix/install-jar
+      :desc "flix init project" "C-c C-i" #'+flix/init-project
+      :desc "flix command" "C-c C-SPC" #'+flix/flix-command
+      :desc "goto flix repl" "C-c C-z" #'+flix/goto-repl)
+
+;; Keymaps for flix-repl-mode.
+(map! :map 'flix-repl-mode-map
+      :desc "restart flix repl" "C-c C-c C-r" #'+flix/repl-restart
+      :desc "goto flix buffer" "C-c C-z" #'+flix/goto-flix-buffer)
