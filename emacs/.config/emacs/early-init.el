@@ -1,4 +1,4 @@
-;;; early-init.el --- Emacs early init file
+;;; early-init.el --- Emacs early init file -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;; Code to run before init.el is loaded.
 ;;; Code:

@@ -99,7 +99,7 @@
   "The directory from which to start the Flix REPL.")
 
 (defvar flix-last-buffer nil
-  "The last flix buffer to call the repl")
+  "The last flix buffer to call the repl.")
 
 (defun +flix--repl-apply-ansi-color (string)
   "Apply ANSI color codes to STRING."

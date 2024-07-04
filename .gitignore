@@ -1,3 +1,6 @@
 straight/
 eln-cache/
 auto-save-list/
+tree-sitter/
+transient/
+projects

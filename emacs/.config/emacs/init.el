@@ -1,4 +1,10 @@
-;;; bootstrap straight.el
+;;; init.el --- setup packages -*- lexical-binding: t; -*-
+;;; Commentary:
+;; Bootstrap straight.el so that it can setup pacakge management.
+;; Create the variable for config directory
+;;; Code:
+
+;; bootstrap straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name
@@ -22,3 +28,5 @@
 
 ;; Load `config.el` relative to `init.el`
 (load (expand-file-name "config.el" my-config-dir))
+
+;;; init.el ends here
