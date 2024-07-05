@@ -61,7 +61,7 @@
 
 ;; Straigh.el configurations
 
-;; Install use-package
+;; Package management and setup with use-package
 (straight-use-package 'use-package)
 
 ;; Make straight the default
@@ -112,7 +112,13 @@
 
 ;; Completion engines
 
-;; Install vertico for completion UI
+;; Orderless to get better completions
+(use-package orderless
+  :custom
+  (completion-styles
+   '(basic partial-completion orderless))) ; orderless needs to be last
+
+;; Vertico for completion UI
 (use-package vertico
   :init
   (vertico-mode))
@@ -122,8 +128,14 @@
   :config
   (global-company-mode t))
 
-;; Consult for project searching
+;; Consult for searching, grepping, and project exploration
 (use-package consult)
+(use-package consult-flycheck)
+
+;; Get detailed popup descriptions
+(use-package marginalia
+  :init
+  (marginalia-mode))
 
 ;; Keybindings packages and settings
 
@@ -137,29 +149,34 @@
   :after magit
   :config
   (general-evil-setup)
+  ;; global keybindings
   (general-create-definer global/leader-keys
     :states '(normal insert viaul emacs)
     :keymaps 'override
     :prefix "SPC"
     :global-prefix "C-SPC")
   (global/leader-keys
+    ;; SPC +
     "r r" '(reload-emacs-config :wk "reload config")
-    "b s" '(consult-buffer :wk "switch to buffer")
-    "b k" '(kill-buffer-and-window :wk "kill buffer")
+    "b s" '(consult-buffer :wk "consult buffer")
+    "b k" '(kill-buffer-and-window :wk "kill buffer and window")
     "o c" '(open-config-file :wk "open config file")
-    "p s" '(consult-ripgrep :wk "search project for text")
-    "p f" '(consult-find :wk "search project for file")
-    "p x" '(project-find-regexp :wk "project find regexp")
+    ;; use "--" to pass options to `ripgrep'
+    "p r" '(consult-ripgrep :wk "consult ripgrep")
+    "p f" '(consult-find :wk "consult find")
+    "E" '(consult-flycheck :wk "consult flycheck")
+    "m" '(consult-imenu :wk "consult imenu")
     "g" '(magit :wk "magit")
+    "/" '(consult-line :wk "consult find line")
     "." '(find-file :wk "find file")
-    ":" '(execute-extended-command :wk "execute command")
+    ":" '(execute-extended-command :wk "execute extended command") ; M-x
     "!" '(shell-command :wk "shell command")
     "&" '(async-shell-command :wk "async shell command")))
 
 ;; Version control management
 (use-package magit)
 
-;; Language specific configs
+;; Programming tooling for IDE like features
 
 ;; Flyspell for linting
 (use-package flycheck
