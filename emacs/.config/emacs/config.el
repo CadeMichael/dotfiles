@@ -55,9 +55,9 @@
    'org-babel-load-languages
    '((python . t)))
 
-  ;; Prog modes
-  (add-hook 'prog-mode-hook             ; line numbers only in prog modes
-	    #'(lambda () (display-line-numbers-mode 1))))
+  :hook
+  ;; Programming mode hooks
+  (prog-mode . display-line-numbers-mode))
 
 ;; Straigh.el configurations
 
@@ -182,5 +182,8 @@
 
 ;; Load ocaml config
 (load-config-file "ocaml-conf.el")
+
+;; Load markdown config
+(load-config-file "md-conf.el")
 
 ;;; config.el ends here
