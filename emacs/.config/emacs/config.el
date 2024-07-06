@@ -182,7 +182,7 @@
 (use-package eglot
   :straight nil
   :custom
-  (eldoc-echo-area-use-multiline-p nil))
+  (eldoc-echo-area-use-multiline-p nil)
 
 ;; Flyspell for linting
 (use-package flycheck
