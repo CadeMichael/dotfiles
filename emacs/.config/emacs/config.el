@@ -151,7 +151,7 @@
   (general-evil-setup)
   ;; global keybindings
   (general-create-definer global/leader-keys
-    :states '(normal insert viaul emacs)
+    :states '(normal insert visual emacs)
     :keymaps 'override
     :prefix "SPC"
     :global-prefix "C-SPC")
@@ -177,6 +177,12 @@
 (use-package magit)
 
 ;; Programming tooling for IDE like features
+
+;; Eglot with limited mini buffer madness
+(use-package eglot
+  :straight nil
+  :custom
+  (eldoc-echo-area-use-multiline-p nil))
 
 ;; Flyspell for linting
 (use-package flycheck
