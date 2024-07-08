@@ -5,6 +5,8 @@
 ;; -> Rust
 ;; -> Python
 ;; -> Ocaml
+;; -> Markdown
+;; -> Flix
 ;;; Code:
 
 ;; Emacs system settings
@@ -99,16 +101,18 @@
 ;; Themeing
 
 ;; Theme
-(use-package gruvbox-theme
+(use-package catppuccin-theme
+  :custom
+  (catppuccin-flavor 'latte)
   :init
-  (load-theme 'gruvbox :no-confirm))
+  (load-theme 'catppuccin :no-confirm))
 
 ;; Modeline
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)
   :config
+  (setq doom-modeline-icon nil)
   (setq doom-modeline-height 25))
-
 
 ;; Completion engines
 
@@ -130,7 +134,6 @@
 
 ;; Consult for searching, grepping, and project exploration
 (use-package consult)
-(use-package consult-flycheck)
 
 ;; Get detailed popup descriptions
 (use-package marginalia
@@ -162,9 +165,12 @@
     "b k" '(kill-buffer-and-window :wk "kill buffer and window")
     "o c" '(open-config-file :wk "open config file")
     ;; use "--" to pass options to `ripgrep'
-    "p r" '(consult-ripgrep :wk "consult ripgrep")
-    "p f" '(consult-find :wk "consult find")
-    "E" '(consult-flycheck :wk "consult flycheck")
+    "f r" '(consult-ripgrep :wk "consult ripgrep")
+    "f f" '(consult-find :wk "consult find")
+    "p s" '(project-switch-project :wk "project switch")
+    "p F" '(project-forget-project :wk "project forget")
+    "p k" '(project-kill-buffers :wk "project kill buffers")
+    "E" '(consult-flymake :wk "consult flymake")
     "m" '(consult-imenu :wk "consult imenu")
     "g" '(magit :wk "magit")
     "/" '(consult-line :wk "consult find line")
@@ -176,18 +182,35 @@
 ;; Version control management
 (use-package magit)
 
+;; Show where changes are in a vc tracked file
+(use-package git-gutter
+  :init
+  (global-git-gutter-mode +1)
+  :config
+  (general-nmap 'override
+    "[g" 'git-gutter:previous-hunk
+    "]g" 'git-gutter:next-hunk))
+
 ;; Programming tooling for IDE like features
+
+;; Project configurations
+(use-package project
+  :straight nil
+  :preface
+  ;; find cmake projects
+  (defun project-find-cmake (dir)
+    (when-let ((root (locate-dominating-file dir "CMakeLists.txt")))
+      (cons 'cmake-lists root)))
+  (cl-defmethod project-root ((project (head cmake-lists)))
+    (cdr project))
+  :config
+  (add-hook 'project-find-functions 'project-find-cmake))
 
 ;; Eglot with limited mini buffer madness
 (use-package eglot
   :straight nil
   :custom
-  (eldoc-echo-area-use-multiline-p nil)
-
-;; Flyspell for linting
-(use-package flycheck
-  :init
-  (global-flycheck-mode))
+  (eldoc-echo-area-use-multiline-p nil))
 
 ;; Treesitter for syntax
 (use-package treesit
@@ -208,5 +231,8 @@
 
 ;; Load markdown config
 (load-config-file "md-conf.el")
+
+;; Load flix config
+(load-config-file "flix-conf.el")
 
 ;;; config.el ends here

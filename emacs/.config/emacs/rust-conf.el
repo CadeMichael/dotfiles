@@ -8,9 +8,4 @@
   (setq rust-mode-form t)
   (setq rust-mode-treesitter-derive t))
 
-(use-package flycheck-rust
-  :after rust-mode
-  :hook
-  (flycheck-mode . flycheck-rust-setup))
-
 ;;; rust-conf.el ends here
