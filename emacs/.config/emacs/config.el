@@ -103,7 +103,7 @@
 ;; Theme
 (use-package catppuccin-theme
   :custom
-  (catppuccin-flavor 'latte)
+  (catppuccin-flavor 'mocha)
   :init
   (load-theme 'catppuccin :no-confirm))
 
