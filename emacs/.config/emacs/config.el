@@ -34,6 +34,7 @@
   (setq read-extended-command-predicate ; only show 'M-x' commands relevant to mode
 	#'command-completion-default-include-p)
   (setq enable-recursive-minibuffers t) ; allow opening minibufs in minibufs
+  (setopt use-short-answers t)		; y or n
 
   ;; Theme
   (if (eq system-type 'darwin)          ; set font based on OS
@@ -45,6 +46,7 @@
   (menu-bar-mode -1)                    ; no menu bar
   (tool-bar-mode -1)                    ; no tool bar
   (scroll-bar-mode -1)                  ; no scroll bar
+  (global-visual-line-mode)		; better line wrapping
 
   ;; Org mode / notes
   (require 'org-tempo)                  ; org snippets
@@ -59,7 +61,11 @@
 
   :hook
   ;; Programming mode hooks
-  (prog-mode . display-line-numbers-mode))
+  (prog-mode . display-line-numbers-mode)
+  (prog-mode . hl-line-mode)
+  ;; Folding for non ts-modes
+  (emacs-lisp-mode . hs-minor-mode)
+  (c++-mode . hs-minor-mode))
 
 ;; Straigh.el configurations
 
@@ -113,6 +119,16 @@
   :config
   (setq doom-modeline-icon nil)
   (setq doom-modeline-height 25))
+
+;; Icons in dired
+(use-package nerd-icons-dired
+  :hook
+  (dired-mode . nerd-icons-dired-mode))
+
+;; Different colors for different delimiters
+(use-package rainbow-delimiters
+  :hook
+  (prog-mode . rainbow-delimiters-mode))
 
 ;; Completion engines
 
@@ -168,8 +184,13 @@
     "f r" '(consult-ripgrep :wk "consult ripgrep")
     "f f" '(consult-find :wk "consult find")
     "p s" '(project-switch-project :wk "project switch")
-    "p F" '(project-forget-project :wk "project forget")
     "p k" '(project-kill-buffers :wk "project kill buffers")
+    "p F" '(project-forget-project :wk "project forget")
+    "p R" '(project-remember-projects-under :wk "project remember projects under")
+    "p !" '(project-shell-command :wk "project shell command")
+    "p &" '(project-async-shell-command :wk "project async shell command")
+    "c c" '(quickrun :wk "quickrun")
+    "c a" '(quickrun-with-arg :wk "quickrun with arg")
     "E" '(consult-flymake :wk "consult flymake")
     "m" '(consult-imenu :wk "consult imenu")
     "g" '(magit :wk "magit")
@@ -192,6 +213,14 @@
     "]g" 'git-gutter:next-hunk))
 
 ;; Programming tooling for IDE like features
+
+;; Elisp overlays
+(use-package eros
+  :init
+  (eros-mode 1))
+
+;; Running code more dynamically
+(use-package quickrun)
 
 ;; Project configurations
 (use-package project
@@ -218,7 +247,15 @@
   :config
   (setq treesit-font-lock-level 4) ; maximum highlighting
   (setq major-mode-remap-alist
-	'((python-mode . python-ts-mode))))
+	'((python-mode . python-ts-mode)
+	  (c-mode . c-ts-mode))))
+
+;; Folding for `treesit' supported languages
+(use-package treesit-fold
+  :straight
+  (treesit-fold :type git :host github :repo "emacs-tree-sitter/treesit-fold")
+  :init
+  (global-treesit-fold-mode))
 
 ;; Load rust config
 (load-config-file "rust-conf.el")

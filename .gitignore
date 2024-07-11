@@ -1,5 +1,6 @@
 straight/
 eln-cache/
+eshell/
 elpa/
 auto-save-list/
 tree-sitter/

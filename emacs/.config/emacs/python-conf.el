@@ -27,6 +27,13 @@
 
 (use-package python
   :straight nil
+  :defer t
+  :config
+  (quickrun-add-command "python"	; quicky run python files
+    '((:command . "python3")
+      (:exec    . ("%c %s"))
+      (:tempfile . nil))
+    :default "python")
   :bind
   (:map python-ts-mode-map
    ([remap python-shell-switch-to-shell] . +python/goto-repl)
