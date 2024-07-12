@@ -12,6 +12,7 @@
 ;; Emacs system settings
 (use-package emacs
   :straight nil
+  :defer t
   :preface
   (defun load-config-file (file)
     "Load files in the config dir."
@@ -35,6 +36,7 @@
 	#'command-completion-default-include-p)
   (setq enable-recursive-minibuffers t) ; allow opening minibufs in minibufs
   (setopt use-short-answers t)		; y or n
+  (setq auto-save-default nil) 		; don't auto save
 
   ;; Theme
   (if (eq system-type 'darwin)          ; set font based on OS
@@ -256,6 +258,10 @@
   (treesit-fold :type git :host github :repo "emacs-tree-sitter/treesit-fold")
   :init
   (global-treesit-fold-mode))
+
+;; For shell scripting
+(use-package sh-script
+  :straight nil)
 
 ;; Load rust config
 (load-config-file "rust-conf.el")

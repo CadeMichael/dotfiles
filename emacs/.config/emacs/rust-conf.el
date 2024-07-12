@@ -4,7 +4,8 @@
 ;;; Code:
 
 (use-package rust-mode
-  :init
+  :defer t
+  :config
   (setq rust-mode-form t)
   (setq rust-mode-treesitter-derive t))
 
