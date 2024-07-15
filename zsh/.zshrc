@@ -7,17 +7,21 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # [Homebrew]
-# Curl
+# curl
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
-# Libtool
+# libtool
 export PATH="/opt/homebrew/opt/libtool/libexec/gnubin:$PATH"
 # libpq
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/libpq/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/libpq/lib/pkgconfig"
+# llvm
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
 # [go]
 export PATH=$PATH:/usr/local/go/bin
@@ -68,4 +72,3 @@ alias ff='open -a /Applications/Firefox.app'
 eval "$(zoxide init zsh --cmd cd)"
 # [starship]
 eval "$(starship init zsh)"
-

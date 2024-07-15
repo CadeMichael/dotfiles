@@ -41,7 +41,7 @@
   ;; Theme
   (if (eq system-type 'darwin)          ; set font based on OS
       (add-to-list 'default-frame-alist
-		   '(font . "Hack Nerd Font 16"))
+		   '(font . "Hack Nerd Font 18"))
     (add-to-list 'default-frame-alist
 		 '(font . "Blex Mono Nerd Font 18")))
   (setq inhibit-startup-message t)      ; no splash screen
@@ -193,6 +193,7 @@
     "p &" '(project-async-shell-command :wk "project async shell command")
     "c c" '(quickrun :wk "quickrun")
     "c a" '(quickrun-with-arg :wk "quickrun with arg")
+    "SPC" '(+eat/other-window-or-last-buffer :wk "eat other window or last buffer")
     "E" '(consult-flymake :wk "consult flymake")
     "m" '(consult-imenu :wk "consult imenu")
     "g" '(magit :wk "magit")
@@ -216,13 +217,39 @@
 
 ;; Programming tooling for IDE like features
 
+;; Better terminal emulation
+(use-package eat
+  :straight (eat :type git
+		 :host codeberg
+		 :repo "akib/emacs-eat"
+		 :files ("*.el" ("term" "term/*.el") "*.texi"
+			 "*.ti" ("terminfo/e" "terminfo/e/*")
+			 ("terminfo/65" "terminfo/65/*")
+			 ("integration" "integration/*")
+			 (:exclude ".dir-locals.el" "*-tests.el")))
+  :config
+  ;; evil keybindings
+  (general-nmap 'eat-mode-map
+    "q" 'quit-window)
+  ;; configuring terminal
+  (setq eat-term-name "eat-color")
+  (defvar +eat/last-buffer nil))
+
+(defun +eat/other-window-or-last-buffer ()
+  "Either open `eat' in a new window or switch to last buffer to call eat."
+  (interactive)
+  (let ((mode major-mode))
+    (if (eq mode 'eat-mode)
+	(when (bound-and-true-p +eat/last-buffer)
+	  (switch-to-buffer-other-window +eat/last-buffer))
+      (let ((buffer (current-buffer)))
+	(setq +eat/last-buffer buffer)
+	(eat-other-window)))))
+
 ;; Elisp overlays
 (use-package eros
   :init
   (eros-mode 1))
-
-;; Running code more dynamically
-(use-package quickrun)
 
 ;; Project configurations
 (use-package project
@@ -242,6 +269,16 @@
   :straight nil
   :custom
   (eldoc-echo-area-use-multiline-p nil))
+
+;; Debugging
+(use-package realgud
+  :config
+  (setq realgud-window-split-orientation 'horizontal))
+;; lldb support
+(use-package realgud-lldb)
+
+;; Running code more dynamically
+(use-package quickrun)
 
 ;; Treesitter for syntax
 (use-package treesit
