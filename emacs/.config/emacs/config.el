@@ -172,6 +172,7 @@
   (general-evil-setup)
   ;; global keybindings
   (general-create-definer global/leader-keys
+    :defer t
     :states '(normal insert visual emacs)
     :keymaps 'override
     :prefix "SPC"
@@ -219,6 +220,7 @@
 
 ;; Better terminal emulation
 (use-package eat
+  :defer t
   :straight (eat :type git
 		 :host codeberg
 		 :repo "akib/emacs-eat"
@@ -235,6 +237,7 @@
   (setq eat-term-name "eat-color")
   (defvar +eat/last-buffer nil))
 
+;;;###autoload
 (defun +eat/other-window-or-last-buffer ()
   "Either open `eat' in a new window or switch to last buffer to call eat."
   (interactive)
@@ -272,10 +275,12 @@
 
 ;; Debugging
 (use-package realgud
+  :defer t
   :config
   (setq realgud-window-split-orientation 'horizontal))
 ;; lldb support
-(use-package realgud-lldb)
+(use-package realgud-lldb
+  :after realgud)
 
 ;; Running code more dynamically
 (use-package quickrun)
