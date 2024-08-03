@@ -2,8 +2,8 @@
 option_as_alt = "OnlyLeft"
 
 [font]
-normal = { family = "Hack Nerd Font", style = "Regular" }
-size = 17
+normal = { family = "Monoid Nerd Font", style = "Regular" }
+size = 16
 
 # Catppuccin
 [colors.primary]

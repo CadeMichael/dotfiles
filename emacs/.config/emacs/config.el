@@ -41,7 +41,7 @@
   ;; Theme
   (if (eq system-type 'darwin)          ; set font based on OS
       (add-to-list 'default-frame-alist
-		   '(font . "Hack Nerd Font 18"))
+		   '(font . "Monoid Nerd Font 16"))
     (add-to-list 'default-frame-alist
 		 '(font . "Blex Mono Nerd Font 18")))
   (setq inhibit-startup-message t)      ; no splash screen
@@ -193,9 +193,9 @@
     "p !" '(project-shell-command :wk "project shell command")
     "p &" '(project-async-shell-command :wk "project async shell command")
     "c c" '(quickrun :wk "quickrun")
-    "c a" '(quickrun-with-arg :wk "quickrun with arg")
     "SPC" '(+eat/other-window-or-last-buffer :wk "eat other window or last buffer")
     "E" '(consult-flymake :wk "consult flymake")
+    "q" '(kill-emacs :wk "kill emacs")
     "m" '(consult-imenu :wk "consult imenu")
     "g" '(magit :wk "magit")
     "/" '(consult-line :wk "consult find line")

@@ -6,12 +6,6 @@
 (use-package rust-mode
   :init
   (setq rust-mode-form t)
-  (setq rust-mode-treesitter-derive t)
-  :config
-  (quickrun-add-command "rust"
-    '((:command . "cargo")
-      (:exec    . ("%c run"))
-      (:tempfile . nil))
-    :default "rust"))
+  (setq rust-mode-treesitter-derive t))
 
 ;;; rust-conf.el ends here

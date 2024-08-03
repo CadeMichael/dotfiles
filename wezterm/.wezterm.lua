@@ -5,8 +5,9 @@ local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
 -- Window config
-config.color_scheme = 'GruvboxDark'
-config.window_background_opacity = 0.95
+config.color_scheme = 'Catppuccin Mocha'
+config.window_background_opacity = 0.97
+config.macos_window_background_blur = 10
 config.window_padding = {
   left = 3,
   right = 0,
@@ -22,19 +23,19 @@ wezterm.on(
     local title = tab.tab_index
     if tab.is_active then
       return {
-        { Text = ' <' .. title .. '> '}
+        { Text = ' <' .. title .. '> ' }
       }
     else
       return {
-        { Text = '|' .. title .. '|'}
+        { Text = '|' .. title .. '|' }
       }
     end
   end
 )
 
 -- Font
-config.font_size = 22
-config.font = wezterm.font 'Blex Mono Nerd Font'
+config.font_size = 17
+-- config.font = wezterm.font 'Monoid Nerd Font'
 
 config.keys = {
   {
