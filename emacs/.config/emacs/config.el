@@ -57,6 +57,8 @@
    org-edit-src-content-indentation 0)
   (setq org-src-preserve-indentation t) ; fix src block indents
   (setq org-src-tab-acts-natively t)    ; allow indenting in src blocks
+  (setq org-format-latex-options        ; preview size for latex
+	(plist-put org-format-latex-options :scale 2.5))
   (org-babel-do-load-languages          ; load babel languages
    'org-babel-load-languages
    '((python . t)))
@@ -292,7 +294,8 @@
   (setq treesit-font-lock-level 4) ; maximum highlighting
   (setq major-mode-remap-alist
 	'((python-mode . python-ts-mode)
-	  (c-mode . c-ts-mode))))
+	  (c-mode . c-ts-mode)
+	  (java-mode . java-ts-mode))))
 
 ;; Folding for `treesit' supported languages
 (use-package treesit-fold
@@ -319,5 +322,8 @@
 
 ;; Load flix config
 (load-config-file "flix-conf.el")
+
+;; Load verification config
+(load-config-file "verif-conf.el")
 
 ;;; config.el ends here
