@@ -258,8 +258,7 @@
 (defun +eat/lazy-git ()
   "Open Lazygit in a new Eat window."
   (interactive)
-  (eat-other-window "lazygit" "P")
-  (delete-other-windows))
+  (eat "lazygit" "P"))
 
 ;; Elisp overlays
 (use-package eros
