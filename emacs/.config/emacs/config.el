@@ -43,7 +43,7 @@
       (add-to-list 'default-frame-alist
 		   '(font . "Monoid Nerd Font 16"))
     (add-to-list 'default-frame-alist
-		 '(font . "Blex Mono Nerd Font 18")))
+		 '(font . "JetBrainsMono Nerd Font 12")))
   (setq inhibit-startup-message t)      ; no splash screen
   (menu-bar-mode -1)                    ; no menu bar
   (tool-bar-mode -1)                    ; no tool bar
@@ -185,6 +185,8 @@
     "b s" '(consult-buffer :wk "consult buffer")
     "b k" '(kill-buffer-and-window :wk "kill buffer and window")
     "o c" '(open-config-file :wk "open config file")
+    ;; lazygit
+    "l g" '(+eat/lazy-git :wk "lazygit")
     ;; use "--" to pass options to `ripgrep'
     "f r" '(consult-ripgrep :wk "consult ripgrep")
     "f f" '(consult-find :wk "consult find")
@@ -237,6 +239,7 @@
     "q" 'quit-window)
   ;; configuring terminal
   (setq eat-term-name "eat-color")
+  (setq eat-kill-buffer-on-exit t)
   (defvar +eat/last-buffer nil))
 
 ;;;###autoload
@@ -250,6 +253,13 @@
       (let ((buffer (current-buffer)))
 	(setq +eat/last-buffer buffer)
 	(eat-other-window)))))
+
+;;;###autoload
+(defun +eat/lazy-git ()
+  "Open Lazygit in a new Eat window."
+  (interactive)
+  (eat-other-window "lazygit" "P")
+  (delete-other-windows))
 
 ;; Elisp overlays
 (use-package eros

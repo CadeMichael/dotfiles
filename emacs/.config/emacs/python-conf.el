@@ -41,4 +41,8 @@
    :map inferior-python-mode-map
    ("C-c C-z" . +python/goto-python-buffer)))
 
+(use-package pyvenv
+  :config
+  (setq python-shell-interpreter "python"))
+
 ;;; python-conf.el ends here

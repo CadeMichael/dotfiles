@@ -14,6 +14,7 @@
 	("C-c C-c C-i" . +flix/install-jar)
 	("C-c C-i" . +flix/init-project)
 	("C-c C-c C-r" . +flix/repl-restart)
+	("C-c C-c C-t" . +flix/test-project)
 	("C-c C-z" . +flix/goto-repl))
   (:map flix-repl-mode-map
 	("C-c C-c C-r" . +flix/repl-restart)
