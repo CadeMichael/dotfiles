@@ -153,6 +153,15 @@
   :config
   (global-company-mode t))
 
+(use-package yasnippet
+  :defer t
+  :config
+  (setq yas-snippet-dir "~/.config/emacs/snippets")
+  (yas-reload-all)
+  :bind (:map yas-minor-mode-map ("<backtab>" . yas-prev-field))
+  :hook
+  (prog-mode . yas-minor-mode))
+
 ;; Consult for searching, grepping, and project exploration
 (use-package consult)
 
@@ -191,6 +200,8 @@
     "o c" '(open-config-file :wk "open config file")
     ;; lazygit
     "l g" '(+eat/lazy-git :wk "lazygit")
+    ;; snippets
+    "s n" '(yas-new-snippet :wk "yas new snippet")
     ;; use "--" to pass options to `ripgrep'
     "f r" '(consult-ripgrep :wk "consult ripgrep")
     "f f" '(consult-find :wk "consult find")
