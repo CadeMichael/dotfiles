@@ -7,6 +7,7 @@
 ;; -> Ocaml
 ;; -> Markdown
 ;; -> Flix
+;; -> Coq
 ;;; Code:
 
 ;; Emacs system settings
@@ -172,6 +173,9 @@
   :after magit
   :config
   (general-evil-setup)
+  ;; evil maps
+  (general-nmap
+    "U" 'evil-redo)
   ;; global keybindings
   (general-create-definer global/leader-keys
     :defer t
@@ -199,6 +203,7 @@
     "c c" '(quickrun :wk "quickrun")
     "SPC" '(+eat/other-window-or-last-buffer :wk "eat other window or last buffer")
     "E" '(consult-flymake :wk "consult flymake")
+    "W" '(toggle-truncate-lines :wk "toggle truncate lines")
     "q" '(kill-emacs :wk "kill emacs")
     "m" '(consult-imenu :wk "consult imenu")
     "g" '(magit :wk "magit")

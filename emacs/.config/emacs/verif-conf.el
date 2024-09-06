@@ -5,8 +5,10 @@
 ;;; Code:
 
 (use-package proof-general
+  :defer t
+  :after coq-mode
   :bind
   (:map coq-mode-map
 	("C-c ." . proof-retract-until-point-interactive)))
 
-;;; rust-conf.el ends here
+;;; verif-conf.el ends here
