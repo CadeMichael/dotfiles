@@ -4,11 +4,21 @@
 ;; https://proofgeneral.github.io/doc/master/userman/Coq-Proof-General/#Coq-Proof-General
 ;;; Code:
 
+;; Coq + Isabelle
 (use-package proof-general
   :defer t
   :after coq-mode
   :bind
   (:map coq-mode-map
 	("C-c ." . proof-retract-until-point-interactive)))
+
+;; Idris2
+(use-package idris-mode
+  :custom
+  (idris-interpreter-path "idris2"))
+
+;; Agda (installed when installing Agda via cabal)
+(load-file (let ((coding-system-for-read 'utf-8))
+	     (shell-command-to-string "agda-mode locate")))
 
 ;;; verif-conf.el ends here

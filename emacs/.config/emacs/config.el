@@ -291,26 +291,28 @@
       (cons 'cmake-lists root)))
   (cl-defmethod project-root ((project (head cmake-lists)))
     (cdr project))
+  ;; find uv projects
+  (defun project-find-uv (dir)
+    (when-let ((root (locate-dominating-file dir "pyproject.toml")))
+      (cons 'uv-lists root)))
+  (cl-defmethod project-root ((project (head uv-lists)))
+    (cdr project))
+  ;; find projects w/ a README
+  (defun project-find-README (dir)
+    (when-let ((root (locate-dominating-file dir "README.md")))
+      (cons 'README-lists root)))
+  (cl-defmethod project-root ((project (head README-lists)))
+    (cdr project))
   :config
-  (add-hook 'project-find-functions 'project-find-cmake))
+  (add-hook 'project-find-functions 'project-find-cmake)
+  (add-hook 'project-find-functions 'project-find-uv)
+  (add-hook 'project-find-functions 'project-find-README))
 
 ;; Eglot with limited mini buffer madness
 (use-package eglot
   :straight nil
   :custom
   (eldoc-echo-area-use-multiline-p nil))
-
-;; Debugging
-(use-package realgud
-  :defer t
-  :config
-  (setq realgud-window-split-orientation 'horizontal))
-;; lldb support
-(use-package realgud-lldb
-  :after realgud)
-
-;; Running code more dynamically
-(use-package quickrun)
 
 ;; Treesitter for syntax
 (use-package treesit
@@ -329,6 +331,18 @@
   :init
   (global-treesit-fold-mode))
 
+;; Debugging
+(use-package realgud
+  :defer t
+  :config
+  (setq realgud-window-split-orientation 'horizontal))
+;; lldb support
+(use-package realgud-lldb
+  :after realgud)
+
+;; Running code more dynamically
+(use-package quickrun)
+
 ;; For shell scripting
 (use-package sh-script
   :straight nil)
@@ -339,14 +353,11 @@
 ;; Load python config
 (load-config-file "python-conf.el")
 
-;; Load ocaml config
-(load-config-file "ocaml-conf.el")
+;; Load func-langs config
+(load-config-file "func-langs.el")
 
 ;; Load markdown config
 (load-config-file "md-conf.el")
-
-;; Load flix config
-(load-config-file "flix-conf.el")
 
 ;; Load verification config
 (load-config-file "verif-conf.el")

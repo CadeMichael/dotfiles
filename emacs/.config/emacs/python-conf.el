@@ -38,11 +38,17 @@
   (:map python-ts-mode-map
    ([remap python-shell-switch-to-shell] . +python/goto-repl)
    ([remap run-python] . +python/run-python)
+   ("C-c r" . python-shell-restart)
    :map inferior-python-mode-map
+   ("C-c r" . python-shell-restart)
    ("C-c C-z" . +python/goto-python-buffer)))
 
 (use-package pyvenv
   :config
-  (setq python-shell-interpreter "python"))
+  (setq python-shell-interpreter "python")
+  :bind
+  (:map python-ts-mode-map
+	("C-c v a" . pyvenv-activate)
+	("C-c v d" . pyvenv-deactivate)))
 
 ;;; python-conf.el ends here
