@@ -81,6 +81,9 @@ alias cb='cargo build'
 alias ct='cargo test -- --nocapture'
 alias ca='cargo add'
 
+# [home manager]
+. "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+
 # [firefox]
 alias ff='open -a /Applications/Firefox.app'
 

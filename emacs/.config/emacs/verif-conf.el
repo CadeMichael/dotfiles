@@ -18,7 +18,8 @@
   (idris-interpreter-path "idris2"))
 
 ;; Agda (installed when installing Agda via cabal)
-(load-file (let ((coding-system-for-read 'utf-8))
-	     (shell-command-to-string "agda-mode locate")))
+(when (not (eq system-type 'darwin))
+  (load-file (let ((coding-system-for-read 'utf-8))
+	       (shell-command-to-string "agda-mode locate"))))
 
 ;;; verif-conf.el ends here
