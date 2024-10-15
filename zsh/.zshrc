@@ -3,6 +3,9 @@ autoload -Uz compinit && compinit
 # case insensitive path-completion 
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
 
+# [home manager]
+. "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+
 # Packages
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -30,18 +33,14 @@ export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 
+# [tex]
+export PATH="/Library/TeX/texbin:$PATH"
+
 # [npm global]
 # add to ~/.npmrc -> prefix="$HOME/.npm-global"
 export PATH="$PATH:$HOME/.npm-global/bin"
 # for local npm installs
 export PATH=$PATH:./node_modules/.bin
-
-# [bun]
-# completions
-[ -s "/Users/cade/.bun/_bun" ] && source "/Users/cade/.bun/_bun"
-# paths
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 
 # [opam]
 [[ ! -r /Users/cade/.opam/opam-init/init.zsh ]] || source /Users/cade/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
@@ -81,8 +80,9 @@ alias cb='cargo build'
 alias ct='cargo test -- --nocapture'
 alias ca='cargo add'
 
-# [home manager]
-. "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+# [home-manager]
+alias hms='home-manager switch'
+alias hmd='home-manager switch && nix-collect-garbage -d'
 
 # [firefox]
 alias ff='open -a /Applications/Firefox.app'

@@ -42,7 +42,7 @@
   ;; Theme
   (if (eq system-type 'darwin)          ; set font based on OS
       (add-to-list 'default-frame-alist
-		   '(font . "Monoid Nerd Font 16"))
+		   '(font . "BlexMono Nerd Font 18"))
     (add-to-list 'default-frame-alist
 		 '(font . "JetBrainsMono Nerd Font 12")))
   (setq inhibit-startup-message t)      ; no splash screen
@@ -112,11 +112,9 @@
 ;; Themeing
 
 ;; Theme
-(use-package catppuccin-theme
-  :custom
-  (catppuccin-flavor 'mocha)
+(use-package gruvbox-theme
   :init
-  (load-theme 'catppuccin :no-confirm))
+  (load-theme 'gruvbox :no-confirm))
 
 ;; Modeline
 (use-package doom-modeline

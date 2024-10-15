@@ -8,9 +8,10 @@ local config = wezterm.config_builder()
 config.audible_bell = "Disabled"
 
 -- Window config
-config.color_scheme = 'Catppuccin Mocha'
-config.window_background_opacity = 0.97
-config.macos_window_background_blur = 10
+config.color_scheme = 'GruvboxDark'
+-- config.window_background_opacity = 0.95
+-- config.macos_window_background_blur = 10
+
 config.window_padding = {
   left = 3,
   right = 0,
@@ -37,8 +38,7 @@ wezterm.on(
 )
 
 -- Font
-config.font_size = 17
--- config.font = wezterm.font 'Monoid Nerd Font'
+config.font_size = 18
 
 config.keys = {
   {
