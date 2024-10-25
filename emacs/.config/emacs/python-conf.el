@@ -27,7 +27,6 @@
 
 (use-package python
   :straight nil
-  :defer t
   :config
   (quickrun-add-command "python"	; quicky run python files
     '((:command . "python3")

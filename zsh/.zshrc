@@ -45,10 +45,6 @@ export PATH=$PATH:./node_modules/.bin
 # [opam]
 [[ ! -r /Users/cade/.opam/opam-init/init.zsh ]] || source /Users/cade/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
-#[zig]
-export PATH="$HOME/zig/zig-macos-aarch64-0.14.0-dev.367+a57479afc:$PATH"
-export PATH="$HOME/zig/zls/zig-out/bin:$PATH"
-
 # Alias
 alias l='ls --color=auto -F'
 alias ls='ls --color=auto -F'
