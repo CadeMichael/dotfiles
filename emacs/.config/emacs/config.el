@@ -50,20 +50,6 @@
   (tool-bar-mode -1)                    ; no tool bar
   (scroll-bar-mode -1)                  ; no scroll bar
   (global-visual-line-mode)		; better line wrapping
-
-  ;; Org mode / notes
-  (require 'org-tempo)                  ; org snippets
-  (setq org-startup-indented t)         ; indent org mode
-  (setq                                 ; no indent in src blocks
-   org-edit-src-content-indentation 0)
-  (setq org-src-preserve-indentation t) ; fix src block indents
-  (setq org-src-tab-acts-natively t)    ; allow indenting in src blocks
-  (setq org-format-latex-options        ; preview size for latex
-	(plist-put org-format-latex-options :scale 2.5))
-  (org-babel-do-load-languages          ; load babel languages
-   'org-babel-load-languages
-   '((python . t)))
-
   :hook
   ;; Programming mode hooks
   (prog-mode . display-line-numbers-mode)
@@ -82,6 +68,25 @@
   :custom
   (straight-use-package-by-default t)
   (straight-cache-autoloads t))
+
+;; Org Mode
+(use-package org
+  :straight t
+  :config
+  ;; Org mode / notes
+  (require 'org-tempo)                  ; org snippets
+  (setq org-startup-indented t)         ; indent org mode
+  (setq                                 ; no indent in src blocks
+   org-edit-src-content-indentation 0)
+  (setq org-src-preserve-indentation t) ; fix src block indents
+  (setq org-src-tab-acts-natively t)    ; allow indenting in src blocks
+  (setq org-format-latex-options        ; preview size for latex
+	(plist-put org-format-latex-options :scale 2.5))
+  (require 'ob-coq)
+  (org-babel-do-load-languages          ; load babel languages
+   'org-babel-load-languages
+   '((python . t)
+     (coq . t))))
 
 ;; Evil mode and related packages
 
@@ -206,6 +211,7 @@
     "f f" '(consult-find :wk "consult find")
     "p s" '(project-switch-project :wk "project switch")
     "p k" '(project-kill-buffers :wk "project kill buffers")
+    "p f" '(project-find-file :wk "project find file")
     "p F" '(project-forget-project :wk "project forget")
     "p R" '(project-remember-projects-under :wk "project remember projects under")
     "p !" '(project-shell-command :wk "project shell command")
