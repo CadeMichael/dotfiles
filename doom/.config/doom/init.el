@@ -119,7 +119,7 @@
        ;;(cc +lsp)         ; C > C++ == 1
        ;;clojure           ; java with a lisp
        ;;common-lisp       ; if you've seen one lisp, you've seen them all
-       ;;coq               ; proofs-as-programs
+       coq                 ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
        ;;csharp            ; unity, .NET, and mono shenanigans
        ;;data              ; config/data formats
@@ -132,7 +132,6 @@
        ;;ess               ; emacs speaks statistics
        ;;factor
        ;;faust             ; dsp, but you get to keep your soul
-       flix
        ;;fortran           ; in FORTRAN, GOD is REAL (unless declared INTEGER)
        ;;fsharp            ; ML stands for Microsoft's Language
        ;;fstar             ; (dependent) types and (monadic) effects and Z3
@@ -154,7 +153,7 @@
         +tree-sitter)
        markdown            ; writing docs for people to ignore
        ;;nim               ; python + lisp at the speed of c
-       ;;nix               ; I hereby declare "nix geht mehr!"
+       nix                 ; I hereby declare "nix geht mehr!"
        (ocaml +tree-sitter); an objective camel
        org                 ; organize your plain life in plain text
        ;;php               ; perl's insecure younger brother
@@ -174,9 +173,8 @@
        ;;scala             ; java, but good
        ;;(scheme +guile)   ; a fully conniving family of lisps
        sh                  ; she sells {ba,z,fi}sh shells on the C xor
-       sml
-       (solidity           ; do you need a blockchain? No.
-        +tree-sitter)
+       ;;sml
+       ;;solidity          ; do you need a blockchain? No.
        ;;swift             ; who asked for emoji variables?
        ;;terra             ; Earth and Moon in alignment for performance.
        ;;web               ; the tubes

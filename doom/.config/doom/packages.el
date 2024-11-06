@@ -49,5 +49,14 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
 
-;; Theming
-(package! catppuccin-theme)
+;; lean4
+(package! lean4-mode :recipe
+  (:host github
+   :repo "leanprover/lean4-mode"
+   :files ("*.el" "data")))
+
+;; org evaluation
+(package! ob-lean4 :recipe
+  (:host github
+   :repo "Maverobot/ob-lean4"
+   :files ("*.el")))

@@ -23,10 +23,10 @@
 
 (setq doom-font
       (if doom--system-macos-p
-          (font-spec :family "Hack Nerd Font" :size 15)
+          (font-spec :family "Hack Nerd Font Mono" :size 18)
         (font-spec :family "Blex Mono Nerd Font" :size 14)))
 
-(setq doom-theme 'catppuccin)
+(setq doom-theme 'doom-gruvbox)
 
 (setq display-line-numbers-type t)
 
@@ -38,3 +38,12 @@
   (setq neo-window-position 'right))
 
 (setq-hook! vterm-mode evil-insert-state-cursor '(box "#FFFFFF"))
+
+(dolist (hook '(prog-mode-hook
+                text-mode-hook
+                coq-mode-hook
+                global-prettify-symbols-mode-hook
+                doom-init-ui-hook
+                doom-first-input-hook
+                doom-first-file-hook))
+  (remove-hook hook #'prettify-symbols-mode))

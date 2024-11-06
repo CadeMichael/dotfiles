@@ -10,7 +10,13 @@
   :after coq-mode
   :bind
   (:map coq-mode-map
-	("C-c ." . proof-retract-until-point-interactive)))
+	("C-c RET" . proof-assert-next-command-interactive)
+	("C-c DEL" . proof-retract-until-point-interactive)))
+
+;; Coq IDE
+(use-package company-coq
+  :hook
+  (coq-mode . company-coq-mode))
 
 ;; Idris2
 (use-package idris-mode

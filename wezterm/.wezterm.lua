@@ -39,7 +39,7 @@ wezterm.on(
 
 -- Font
 config.font_size = 18
-
+config.font = wezterm.font 'Hack Nerd Font'
 config.keys = {
   {
     key = 'w',

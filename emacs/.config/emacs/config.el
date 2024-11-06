@@ -196,6 +196,7 @@
     "b s" '(consult-buffer :wk "consult buffer")
     "b k" '(kill-buffer-and-window :wk "kill buffer and window")
     "o c" '(open-config-file :wk "open config file")
+    "h l" '(hl-line-mode :wk "hl line mode")
     ;; lazygit
     "l g" '(+eat/lazy-git :wk "lazygit")
     ;; snippets
