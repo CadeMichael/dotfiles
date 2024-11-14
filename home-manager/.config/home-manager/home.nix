@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
 
 # when you need an older package
-let
-  pkgStable = import <stable> { };
-in
+# let
+# pkgStable = import <stable> { };
+# in
 {
   # user information
   home.username = "cade";
@@ -16,9 +16,9 @@ in
   home.packages = [
     # Terminal
     pkgs.bat
+    pkgs.coreutils
     pkgs.fzf
     pkgs.gawk
-    pkgs.glow
     pkgs.htop
     pkgs.imagemagick
     pkgs.lazygit
@@ -27,6 +27,7 @@ in
     pkgs.ripgrep
     pkgs.starship
     pkgs.tree
+    pkgs.tree-sitter
     pkgs.zellij
     pkgs.zoxide
 
@@ -35,10 +36,13 @@ in
 
     # Verification
     pkgs.elan
-    pkgStable.isabelle
+    # pkgStable.isabelle
     pkgs.souffle
 
     # Languages
+    # -> C/C++
+    # pkgs.gcc
+    # pkgs.libgcc
     # -> flix
     pkgs.flix
     # -> lua
