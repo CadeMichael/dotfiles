@@ -8,7 +8,7 @@ local config = wezterm.config_builder()
 config.audible_bell = "Disabled"
 
 -- Window config
-config.color_scheme = 'GruvboxDark'
+config.color_scheme = 'Dracula'
 -- config.window_background_opacity = 0.95
 -- config.macos_window_background_blur = 10
 

@@ -5,14 +5,16 @@
 # pkgStable = import <stable> { };
 # in
 {
-  # user information
+  # User information
   home.username = "cade";
   home.homeDirectory = "/Users/cade";
 
   # Compatible Home Manager release
   home.stateVersion = "24.05";
 
-  # installed packages
+  # Allow home manager to configure fonts
+  fonts.fontconfig.enable = true;
+  # Installed packages
   home.packages = [
     # Terminal
     pkgs.bat
@@ -26,17 +28,23 @@
     pkgs.qrencode
     pkgs.ripgrep
     pkgs.starship
+    pkgs.tmux
     pkgs.tree
     pkgs.tree-sitter
-    pkgs.zellij
     pkgs.zoxide
 
+    # Fonts
+    (pkgs.nerdfonts.override {
+      fonts = [
+        "IBMPlexMono"
+        "Hack"
+      ];
+    })
     # Editor
     pkgs.neovim
 
     # Verification
     pkgs.elan
-    # pkgStable.isabelle
     pkgs.souffle
 
     # Languages

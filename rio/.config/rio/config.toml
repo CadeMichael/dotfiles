@@ -34,7 +34,7 @@ padding-x = 7
 # (default is [0, 0])
 #
 # Example:
-# padding-y = [30, 10]
+padding-y = [0, 3]
 
 # Option as Alt
 #
@@ -42,7 +42,7 @@ padding-x = 7
 # Possible choices: 'both', 'left' and 'right'.
 #
 # Example:
-# option-as-alt = 'left'
+option-as-alt = 'left'
 
 # Line height
 #
@@ -126,13 +126,13 @@ args = []
 # • decorations - Set window decorations, options: "Enabled", "Disabled", "Transparent", "Buttonless"
 #
 # Example:
-# [window]
+[window]
 # width = 600
 # height = 400
 # mode = "windowed"
 # opacity = 1.0
 # blur = false
-# decorations = "enabled"
+decorations = "transparent"
 
 # Renderer
 #
@@ -162,7 +162,7 @@ args = []
 performance = "high"
 backend = "automatic"
 # disable-unfocused-render = false
-level = 0
+level = 1
 # filters = []
 
 # Keyboard
@@ -186,8 +186,12 @@ level = 0
 #
 # You can also set family on root to overwrite all fonts.
 [fonts]
-family = "caskaydiacove nerd font"
+family = "blexmono nerd font"
 size = 18
+[fonts.regular]
+weight = 400
+[fonts.italic]
+weight = 400
 #
 # You can also specify extra fonts to load
 # [fonts]
