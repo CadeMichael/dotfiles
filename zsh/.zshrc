@@ -46,8 +46,11 @@ export PATH=$PATH:./node_modules/.bin
 [[ ! -r /Users/cade/.opam/opam-init/init.zsh ]] || source /Users/cade/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
 # Alias
-alias l='ls --color=auto -F'
-alias ls='ls --color=auto -F'
+alias l='eza'
+alias ls='eza --icons'
+function lt() {
+  eza -T --level=$1
+}
 alias v=nvim
 alias oil="nvim ./"
 alias pss="ps aux | rg -i "
@@ -82,9 +85,21 @@ alias hmd='home-manager switch && nix-collect-garbage -d'
 
 # [firefox]
 alias ff='open -a /Applications/Firefox.app'
+# [preview]
+alias preview='open -a Preview'
 
 # [zoxide]
 eval "$(zoxide init zsh --cmd cd)"
 
 # [starship]
 eval "$(starship init zsh)"
+
+# [yazi]
+function y() {
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    builtin cd -- "$cwd"
+  fi
+  rm -f -- "$tmp"
+}

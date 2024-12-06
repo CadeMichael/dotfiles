@@ -19,6 +19,8 @@
     # Terminal
     pkgs.bat
     pkgs.coreutils
+    pkgs.eza
+    pkgs.fh
     pkgs.fzf
     pkgs.gawk
     pkgs.htop
@@ -28,31 +30,21 @@
     pkgs.qrencode
     pkgs.ripgrep
     pkgs.starship
-    pkgs.tmux
-    pkgs.tree
     pkgs.tree-sitter
+    pkgs.yazi
+    pkgs.zellij
     pkgs.zoxide
 
     # Fonts
-    (pkgs.nerdfonts.override {
-      fonts = [
-        "IBMPlexMono"
-        "Hack"
-      ];
-    })
+    pkgs.nerd-fonts.hack
+    pkgs.nerd-fonts.blex-mono
     # Editor
     pkgs.neovim
 
     # Verification
-    pkgs.elan
     pkgs.souffle
 
     # Languages
-    # -> C/C++
-    # pkgs.gcc
-    # pkgs.libgcc
-    # -> flix
-    pkgs.flix
     # -> lua
     pkgs.luajit
     pkgs.lua-language-server
@@ -70,7 +62,7 @@
     pkgs.uv
   ];
 
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+  # ~/.nix-profile/etc/profile.d/hm-session-vars.sh
   home.sessionVariables = {
     EDITOR = "nvim";
     HISTFILE = "$HOME/.zsh_history";

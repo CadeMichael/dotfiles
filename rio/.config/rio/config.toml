@@ -186,7 +186,7 @@ level = 1
 #
 # You can also set family on root to overwrite all fonts.
 [fonts]
-family = "blexmono nerd font"
+family = "BlexMono Nerd Font"
 size = 18
 [fonts.regular]
 weight = 400
