@@ -40,7 +40,7 @@ wezterm.on(
 )
 
 -- Font
-config.font_size = 18
+config.font_size = 17
 config.font = wezterm.font 'BlexMono Nerd Font'
 config.keys = {
   {

@@ -10,6 +10,10 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # [Homebrew]
+# bison
+export LDFLAGS="-L/opt/homebrew/opt/bison/lib"
+export PATH="/opt/homebrew/opt/bison/bin:$PATH"
+
 # curl
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
@@ -42,18 +46,28 @@ export PATH="$PATH:$HOME/.npm-global/bin"
 # for local npm installs
 export PATH=$PATH:./node_modules/.bin
 
+# [zig]
+export PATH="$PATH:$HOME/Downloads/zig-macos-aarch64-0.14.0-dev.2627+6a21d18ad"
+export PATH="$PATH:$HOME/Downloads/zls/zig-out/bin"
+
 # [opam]
 [[ ! -r /Users/cade/.opam/opam-init/init.zsh ]] || source /Users/cade/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
 # Alias
+
+# [eza]
 alias l='eza'
 alias ls='eza --icons'
 function lt() {
   eza -T --level=$1
 }
+# [nvim]
 alias v=nvim
 alias oil="nvim ./"
+
+# [system]
 alias pss="ps aux | rg -i "
+alias utar="tar -xvzf"
 
 # [git]
 alias lg=lazygit
@@ -94,12 +108,5 @@ eval "$(zoxide init zsh --cmd cd)"
 # [starship]
 eval "$(starship init zsh)"
 
-# [yazi]
-function y() {
-  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-  yazi "$@" --cwd-file="$tmp"
-  if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-    builtin cd -- "$cwd"
-  fi
-  rm -f -- "$tmp"
-}
+# [fish]
+exec fish

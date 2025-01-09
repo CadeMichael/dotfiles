@@ -20,7 +20,9 @@
     pkgs.bat
     pkgs.coreutils
     pkgs.eza
+    pkgs.fastfetch
     pkgs.fh
+    pkgs.fish
     pkgs.fzf
     pkgs.gawk
     pkgs.htop
@@ -31,7 +33,7 @@
     pkgs.ripgrep
     pkgs.starship
     pkgs.tree-sitter
-    pkgs.yazi
+    # pkgs.yazi
     pkgs.zellij
     pkgs.zoxide
 
@@ -40,9 +42,6 @@
     pkgs.nerd-fonts.blex-mono
     # Editor
     pkgs.neovim
-
-    # Verification
-    pkgs.souffle
 
     # Languages
     # -> lua
@@ -60,6 +59,9 @@
     pkgs.nixfmt-rfc-style
     # -> python
     pkgs.uv
+    # -> zig
+    # pkgs.zig
+    # pkgs.zls
   ];
 
   # ~/.nix-profile/etc/profile.d/hm-session-vars.sh
